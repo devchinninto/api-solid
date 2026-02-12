@@ -3,17 +3,45 @@
 
 generator client {
   provider = "prisma-client"
-  output = "./generated/prisma"
+  output   = "./generated/prisma"
 }
 
-datasource db { 
+datasource db {
   provider = "postgresql"
 }
 
 model User {
-  id  String @id @default(uuid())
-  name String
-  email String @unique
+  id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name          String
+  email         String    @unique
+  password_hash String
+  created_at    DateTime  @default(now())
+  checkIns      CheckIn[]
 
   @@map("users")
+}
+
+model CheckIn {
+  id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created_at   DateTime  @default(now())
+  validated_at DateTime?
+
+  user   User   @relation(fields: [userId], references: [id])
+  gym    Gym    @relation(fields: [gymId], references: [id])
+  userId String @db.Uuid
+  gymId  String @db.Uuid
+
+  @@map("check-ins")
+}
+
+model Gym {
+  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title       String
+  description String?
+  phone       String?
+  latitude    Decimal
+  longitude   Decimal
+  checkIns    CheckIn[]
+
+  @@map("gyms")
 }
