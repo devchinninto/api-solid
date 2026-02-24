@@ -9,3 +9,6 @@ build
 
 # Prisma
 prisma/generated
+
+# Tests
+coverage
