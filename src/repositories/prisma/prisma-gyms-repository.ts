@@ -3,7 +3,7 @@ import { FindManyNearbyParams, GymsRepository } from '../gyms-repository'
 import { prisma } from '@/lib/prisma'
 import { Gym } from 'prisma/generated/prisma/client'
 
-export class PrismaCheckInsRepository implements GymsRepository {
+export class PrismaGymsRepository implements GymsRepository {
   async findById(id: string) {
     const gym = await prisma.gym.findUnique({
       where: {
