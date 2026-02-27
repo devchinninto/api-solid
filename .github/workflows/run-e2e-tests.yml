@@ -10,6 +10,10 @@ jobs:
       matrix:
         node-version: [20]
 
+    env:
+      JWT_SECRET: testing
+      DATABASE_URL: 'postgresql://docker:docker@localhost:5432/apisolid?schema=public'
+
     services:
       postgres:
         image: bitnami/postgresql
@@ -34,8 +38,8 @@ jobs:
 
       - name: Generate Prisma client
         run: pnpm prisma generate
-        env:
-          JWT_SECRET: testing
-          DATABASE_URL: 'postgresql://docker:docker@localhost:5432/apisolid?schema=public'
+
+      - name: Run Prisma migrations
+        run: pnpm prisma migrate deploy
 
       - run: pnpm run test:e2e
