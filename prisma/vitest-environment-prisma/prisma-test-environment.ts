@@ -1,5 +1,4 @@
 import 'dotenv/config'
-
 import { prisma } from '@/lib/prisma'
 import { execSync } from 'node:child_process'
 
@@ -33,6 +32,7 @@ export default <Environment>{
     return {
       async teardown() {
         // Apagar o banco de testes
+
         await prisma.$executeRawUnsafe(
           `DROP SCHEMA IF EXISTS "${schema}" CASCADE`
         )

@@ -3,8 +3,6 @@ import { app } from '@/app'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { createAndAuthenticateUser } from '@/utils/test/create-and-authenticate-user'
 
-// TODO: Esse teste bate no banco de dados dev - e acaba dependendo de se tem ou não a academia nele. Não está fazendo a verificação e mantendo o ambiente de testes 'isolado' e 'limpo'. FIX THIS para usar o db de teste.
-
 describe('Nearby Gyms (e2e)', () => {
   beforeAll(async () => {
     await app.ready()

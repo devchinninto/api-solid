@@ -20,7 +20,7 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
 
   const createGymUseCase = makeCreateGymUseCase()
 
-  createGymUseCase.execute({
+  await createGymUseCase.execute({
     title,
     description,
     phone,
