@@ -1,5 +1,5 @@
-import { Gym } from 'prisma/generated/prisma/client'
 import { GymsRepository } from '@/repositories/gyms-repository'
+import { Gym } from 'prisma/generated/prisma/client'
 
 interface FetchNearbyGymsUseCaseRequest {
   userLatitude: number
@@ -22,6 +22,8 @@ export class FetchNearbyGymsUseCase {
       longitude: userLongitude
     })
 
-    return { gyms }
+    return {
+      gyms
+    }
   }
 }
